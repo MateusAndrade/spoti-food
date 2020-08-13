@@ -1,17 +1,29 @@
 import React, { useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import qs from 'query-string';
+
+import { FullscreenLoader } from '../../components';
 
 import apiService from '../../services';
 
 import * as actions from '../../store/actions/actions';
+import * as selectors from '../../store/reducers/selectors';
+
+import routes from '../../constants/routes';
 
 const OAuth2 = () => {
   const { search } = useLocation();
+  const history = useHistory();
+
+  const authenticated = useSelector(selectors.isUserAuthenticated);
 
   const dispatch = useDispatch();
+
+  const redirectToPlaylists = () => {
+    history.replace(routes.HOME);
+  };
 
   const authUser = useCallback(async () => {
     try {
@@ -21,6 +33,7 @@ const OAuth2 = () => {
 
       if (tokens) {
         dispatch(actions.setUserAuthenticatedFulfilled(tokens));
+        redirectToPlaylists();
       } else {
         throw new Error('Failed to fetch Auth Info');
       }
@@ -30,10 +43,14 @@ const OAuth2 = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    authUser();
+    if (authenticated) {
+      redirectToPlaylists();
+    } else {
+      authUser();
+    }
   }, []);
 
-  return <div>Authenticating...</div>;
+  return <FullscreenLoader />;
 };
 
 export default OAuth2;

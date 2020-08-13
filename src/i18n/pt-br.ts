@@ -1,7 +1,9 @@
 export default {
   auth: {
     welcome: {
-      message: 'Bem-vindo ao SpotiFood!',
+      button: 'Continuar',
+      message:
+        'Bem-Vindo ao Spoti-Food! Para continuar precisamos autenticar você com ou Spotify.',
     },
   },
 };
