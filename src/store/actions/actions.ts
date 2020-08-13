@@ -8,6 +8,7 @@ export const setUserAuthenticatedRequested = createAction(
 
 export const setUserAuthenticatedFulfilled = createAction(
   actionTypes.USER_AUTHENTICATED_FULFILLED,
+  (payload) => ({ payload }),
 );
 
 export const setUserAuthenticatedFailed = createAction(
