@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
 
@@ -14,15 +15,16 @@ const reducersWithPersist = persistReducer(
 );
 
 export default () => {
+  const composeEnhancers =
+    // @ts-ignore
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
   const store = createStore(
     reducersWithPersist,
-
-    //@ts-ignore
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      //@ts-ignore
-      window.__REDUX_DEVTOOLS_EXTENSION__(),
+    composeEnhancers(applyMiddleware(thunk)),
   );
-  //@ts-ignore
+
+  // @ts-ignore
   const persistor = persistStore(store);
   return { store, persistor };
 };

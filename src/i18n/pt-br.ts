@@ -6,4 +6,10 @@ export default {
         'Bem-Vindo ao Spoti-Food! Para continuar precisamos autenticar você com ou Spotify.',
     },
   },
+  tabBar: {
+    labels: {
+      playlists: 'Playlists',
+      profile: 'Perfil',
+    },
+  },
 };

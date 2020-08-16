@@ -22,7 +22,7 @@ const OAuth2 = () => {
   const dispatch = useDispatch();
 
   const redirectToPlaylists = () => {
-    history.replace(routes.HOME);
+    history.replace(routes.PLAYLISTS);
   };
 
   const authUser = useCallback(async () => {

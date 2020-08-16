@@ -1,5 +1,3 @@
-import { PayloadActionCreator } from '@reduxjs/toolkit';
-
 import * as actionsTypes from '../actions/types';
 
 import { IAction } from '../actions/interfaces';
@@ -15,17 +13,19 @@ export type TAuthState = {
   access_token: string;
   refresh_token: string;
   status: keyof typeof TAuthStatus;
+  language: 'pt-BR' | 'en' | 'es';
 };
 
 const initialState: TAuthState = {
   access_token: '',
   refresh_token: '',
   status: TAuthStatus.PENDING,
+  language: 'pt-BR',
 };
 
 const authReducer = (
   state: TAuthState = initialState,
-  action: IAction<TAuthState>,
+  action: IAction<any>,
 ): TAuthState => {
   switch (action.type) {
     case actionsTypes.USER_AUTHENTICATED_REQUESTED:
@@ -46,6 +46,12 @@ const authReducer = (
       return {
         ...state,
         status: TAuthStatus.FAILED,
+      };
+
+    case actionsTypes.USER_CHANGE_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload,
       };
 
     default:

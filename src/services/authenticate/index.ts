@@ -1,4 +1,4 @@
-import client from '../client';
+import client from '../client-auth';
 
 import services from '../../constants/services';
 
@@ -9,8 +9,6 @@ const authenticateUserOauth2 = async (code: string): Promise<OAuth2 | null> => {
     const { data } = await client.get<OAuth2>(
       `${services.OAUTH2}?code=${code}`,
     );
-
-    console.log('data', data);
 
     return data;
   } catch (error) {

@@ -14,3 +14,5 @@ export const setUserAuthenticatedFulfilled = createAction(
 export const setUserAuthenticatedFailed = createAction(
   actionTypes.USER_AUTHENTICATED_FAILED,
 );
+
+export const setUserLanguage = createAction(actionTypes.USER_CHANGE_LANGUAGE);

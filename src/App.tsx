@@ -1,37 +1,69 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, useHistory } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 
-import './App.css';
+import { useTranslation } from 'react-i18next';
+
+import { makeStyles } from '@material-ui/core/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+
+import { PrivateRouter, PublicRouter } from './navigation';
+
+import * as selectors from './store/reducers/selectors';
 
 import routes from './constants/routes';
 
-import { LoginView, OAuth2View } from './views';
-
-import * as selectors from './store/reducers/selectors';
+const useStyles = makeStyles({
+  bottomBar: {
+    bottom: 0,
+    borderTop: '1px solid #f7f7f7',
+    position: 'absolute',
+    width: '100%',
+  },
+});
 
 function App() {
   const authenticated = useSelector(selectors.isUserAuthenticated);
 
-  return (
-    <Router>
-      <Switch>
-        <Route component={LoginView} path={routes.LOGIN} />
-        <Route component={OAuth2View} path={routes.OAUTH_CALLBACK} />
-        {authenticated ? (
-          <Route path={routes.HOME}>
-            <div>{routes.HOME}</div>
-          </Route>
-        ) : (
-          <Redirect to={routes.LOGIN} from={routes.HOME} />
-        )}
-      </Switch>
-    </Router>
+  const { t } = useTranslation();
+  const history = useHistory();
+
+  const classes = useStyles();
+
+  const [activeTab, setActiveTab] = useState<0 | 1>(0);
+
+  useEffect(() => {
+    if (activeTab) {
+      history.replace(routes.ME);
+    } else {
+      history.replace(routes.PLAYLISTS);
+    }
+  }, [activeTab]);
+
+  return authenticated ? (
+    <>
+      <PrivateRouter />
+      <BottomNavigation
+        value={activeTab}
+        onChange={(event, value) => setActiveTab(value)}
+        showLabels
+        className={classes.bottomBar}>
+        <BottomNavigationAction
+          label={t('tabBar.labels.playlists')}
+          icon={<MusicNoteIcon />}
+        />
+        <BottomNavigationAction
+          label={t('tabBar.labels.profile')}
+          icon={<AccountCircleIcon />}
+        />
+      </BottomNavigation>
+    </>
+  ) : (
+    <PublicRouter />
   );
 }
 
