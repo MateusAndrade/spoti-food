@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 
@@ -14,6 +14,7 @@ import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import { PrivateRouter, PublicRouter } from './navigation';
 
 import * as selectors from './store/reducers/selectors';
+import * as thunks from './store/thunks';
 
 import routes from './constants/routes';
 
@@ -27,7 +28,14 @@ const useStyles = makeStyles({
 });
 
 function App() {
+  const dispatch = useDispatch();
+
   const authenticated = useSelector(selectors.isUserAuthenticated);
+  const activeLanguage = useSelector(selectors.getActiveLanguage);
+
+  useEffect(() => {
+    dispatch(thunks.changeLanguage(activeLanguage));
+  }, [dispatch]);
 
   const { t } = useTranslation();
   const history = useHistory();

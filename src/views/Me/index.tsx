@@ -9,6 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import FollowersIcon from '@material-ui/icons/SupervisedUserCircle';
+import LanguageIcon from '@material-ui/icons/Language';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 import * as thunks from '../../store/thunks';
@@ -65,7 +66,7 @@ const ProfileView = () => {
             button
             onClick={(event) => setAnchorEl(event.currentTarget)}>
             <ListItemIcon>
-              <FollowersIcon />
+              <LanguageIcon />
             </ListItemIcon>
             <ListItemText primary={`${t('profile.changeLanguage')}`} />
           </ListItem>
