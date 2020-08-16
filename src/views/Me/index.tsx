@@ -13,6 +13,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import InfoIcon from '@material-ui/icons/Info';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 
 import * as thunks from '../../store/thunks';
 import * as selectors from '../../store/reducers/selectors';
@@ -52,6 +53,8 @@ const ProfileView = () => {
       window.open(user.external_urls.spotify);
     }
   };
+
+  const handleLogout = () => dispatch(thunks.logoutUser());
 
   if (loading) {
     return <FullscreenLoader />;
@@ -95,9 +98,16 @@ const ProfileView = () => {
           <Divider />
           <ListItem button onClick={openProfilePage}>
             <ListItemIcon>
-              <ExitToAppIcon />
+              <MusicNoteIcon />
             </ListItemIcon>
             <ListItemText primary={t('profile.openProfile')} />
+          </ListItem>
+          <Divider />
+          <ListItem button onClick={handleLogout}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('profile.exit')} />
           </ListItem>
           <Divider />
         </List>

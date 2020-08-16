@@ -25,3 +25,8 @@ export const changeLanguage = (lng: string) => (dispatch: any) => {
   dispatch(actions.setUserLanguage(lng));
   i18n.changeLanguage(lng);
 };
+
+export const logoutUser = () => (dispatch: any) => {
+  dispatch(actions.logoutUser());
+  localStorage.clear();
+};

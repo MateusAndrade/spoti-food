@@ -17,6 +17,7 @@ export default {
     changeLanguage: 'Change Language',
     currentPlan: 'Current Plan',
     openProfile: 'Go to Spotify',
+    exit: 'Exit',
     changeLanguageOptions: {
       'pt-BR': 'Brazilian Portuguese',
       es: 'Spanish',

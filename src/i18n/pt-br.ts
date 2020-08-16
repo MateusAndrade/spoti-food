@@ -17,6 +17,7 @@ export default {
     changeLanguage: 'Mudar Idioma',
     currentPlan: 'Plano Atual',
     openProfile: 'Abrir no Spotify',
+    exit: 'Sair',
     changeLanguageOptions: {
       'pt-BR': 'Português Brasileiro',
       es: 'Espanhol',

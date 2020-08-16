@@ -11,6 +11,7 @@ const reducersWithPersist = persistReducer(
     key: 'v1',
     storage,
   },
+  // @ts-ignore
   rootReducer,
 );
 

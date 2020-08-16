@@ -17,6 +17,8 @@ export const setUserAuthenticatedFailed = createAction(
   actionTypes.USER_AUTHENTICATED_FAILED,
 );
 
+export const logoutUser = createAction(actionTypes.USER_LOGOUT);
+
 export const setUserInfoRequested = createAction(
   actionTypes.USER_INFO_REQUESTED,
 );
