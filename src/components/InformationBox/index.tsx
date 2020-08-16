@@ -1,12 +1,23 @@
 import React from 'react';
 
-import { Box, Button, Typography, Paper } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Typography,
+  Paper,
+  CircularProgress,
+} from '@material-ui/core';
 
 import { Props } from './interface';
 
 import Welcome from '../Illustration/Welcome';
 
-const InformationBox = ({ description, buttonTitle, onClick }: Props) => (
+const InformationBox = ({
+  description,
+  buttonTitle,
+  onClick,
+  loading,
+}: Props) => (
   <Paper>
     <Box
       display="flex"
@@ -19,8 +30,16 @@ const InformationBox = ({ description, buttonTitle, onClick }: Props) => (
         <Box marginBottom="10px">
           <Typography align="center">{description}</Typography>
         </Box>
-        <Button variant="contained" color="primary" onClick={onClick}>
-          {buttonTitle}
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={loading}
+          onClick={onClick}>
+          {loading ? (
+            <CircularProgress style={{ width: 20, height: 20 }} />
+          ) : (
+            buttonTitle
+          )}
         </Button>
       </Box>
     </Box>

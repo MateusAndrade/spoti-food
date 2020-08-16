@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -11,11 +11,17 @@ import { InformationBox } from '../../components';
 const LoginView = () => {
   const { t } = useTranslation();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const authenticateUser = async () => {
+    setLoading(true);
+
     const url = await api.getOAuth2Url();
 
     if (url) {
       window.location.replace(url);
+    } else {
+      console.log('Deu ruim :(');
     }
   };
 
@@ -30,6 +36,7 @@ const LoginView = () => {
           description={t('auth.welcome.message')}
           buttonTitle={t('auth.welcome.button')}
           onClick={() => authenticateUser()}
+          loading={loading}
         />
       </Grid>
     </Grid>
