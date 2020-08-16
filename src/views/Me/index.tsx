@@ -11,6 +11,8 @@ import Divider from '@material-ui/core/Divider';
 import FollowersIcon from '@material-ui/icons/SupervisedUserCircle';
 import LanguageIcon from '@material-ui/icons/Language';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import InfoIcon from '@material-ui/icons/Info';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import * as thunks from '../../store/thunks';
 import * as selectors from '../../store/reducers/selectors';
@@ -19,11 +21,10 @@ import { FullscreenLoader, UserCard, LanguageSelect } from '../../components';
 
 const ProfileView = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const user = useSelector(selectors.getUserInfo);
-  const { loading, failed, fullfiled } = useSelector(selectors.getUserState);
-
-  const { t } = useTranslation();
+  const { loading, fullfiled } = useSelector(selectors.getUserState);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -36,6 +37,20 @@ const ProfileView = () => {
   const changeLanguage = (lng: string) => {
     setAnchorEl(null);
     dispatch(thunks.changeLanguage(lng));
+  };
+
+  const currentPlanLabel = (plan: string) => {
+    const funnyEmoji = plan === 'premium' ? `🕺` : `😴`;
+
+    return `${t(
+      'profile.currentPlan',
+    )}: ${plan.toLocaleUpperCase()} ${funnyEmoji}`;
+  };
+
+  const openProfilePage = () => {
+    if (user.external_urls) {
+      window.open(user.external_urls.spotify);
+    }
   };
 
   if (loading) {
@@ -70,6 +85,21 @@ const ProfileView = () => {
             </ListItemIcon>
             <ListItemText primary={`${t('profile.changeLanguage')}`} />
           </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemIcon>
+              <InfoIcon />
+            </ListItemIcon>
+            <ListItemText primary={currentPlanLabel(user.product)} />
+          </ListItem>
+          <Divider />
+          <ListItem button onClick={openProfilePage}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('profile.openProfile')} />
+          </ListItem>
+          <Divider />
         </List>
       </Grid>
       <ClickAwayListener onClickAway={() => setAnchorEl(null)}>

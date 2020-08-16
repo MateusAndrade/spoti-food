@@ -15,6 +15,8 @@ export default {
   profile: {
     followers: 'Followers',
     changeLanguage: 'Change Language',
+    currentPlan: 'Current Plan',
+    openProfile: 'Go to Spotify',
     changeLanguageOptions: {
       'pt-BR': 'Brazilian Portuguese',
       es: 'Spanish',
