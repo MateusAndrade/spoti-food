@@ -2,16 +2,15 @@ import React from 'react';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import { ProfileView } from '../views';
+import { ProfileView, PlaylistsView } from '../views';
+
 import routes from '../constants/routes';
 
 const PrivateRouter = () => (
   <Switch>
-    <Route path={routes.PLAYLISTS}>
-      <div>{routes.PLAYLISTS}</div>
-    </Route>
+    <Route component={PlaylistsView} path={routes.PLAYLISTS} />
     <Route path={routes.ME} component={ProfileView} />
-    <Redirect from="/" to={routes.ME} />
+    <Redirect from="/" to={routes.PLAYLISTS} />
   </Switch>
 );
 

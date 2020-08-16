@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 
 import auth from './auth';
 import user from './user';
+import filters from './filters';
+
 import { TReduxState } from './interface';
 import { IAction } from '../actions/interfaces';
 
@@ -9,6 +11,7 @@ import * as actionTypes from '../actions/types';
 
 const appReducer = combineReducers({
   auth,
+  filters,
   user,
 });
 

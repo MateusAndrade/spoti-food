@@ -3,15 +3,10 @@ import * as actionsTypes from '../actions/types';
 import { IAction } from '../actions/interfaces';
 import { User } from '../../services/me/interface';
 
-export enum TUserStatus {
-  FAILED = 'FAILED',
-  FULFILLED = 'FULFILLED',
-  LOADING = 'LOADING',
-  PENDING = 'PENDING',
-}
+import { TGenericState } from './interface';
 
 export type TUserState = User & {
-  status: keyof typeof TUserStatus;
+  status: keyof typeof TGenericState;
 };
 
 const initialState: TUserState = {
@@ -41,20 +36,20 @@ const userReducer = (
     case actionsTypes.USER_INFO_REQUESTED:
       return {
         ...state,
-        status: TUserStatus.LOADING,
+        status: TGenericState.LOADING,
       };
 
     case actionsTypes.USER_INFO_FULFILLED:
       return {
         ...state,
         ...action.payload,
-        status: TUserStatus.FULFILLED,
+        status: TGenericState.FULFILLED,
       };
 
     case actionsTypes.USER_INFO_FAILED:
       return {
         ...state,
-        status: TUserStatus.FAILED,
+        status: TGenericState.FAILED,
       };
 
     default:

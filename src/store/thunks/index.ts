@@ -1,6 +1,6 @@
 import * as actions from '../actions/actions';
 
-import spotifyService from '../../services';
+import services from '../../services';
 
 import i18n from '../../i18n';
 
@@ -8,7 +8,7 @@ export const getUserInfo = () => async (dispatch: any) => {
   try {
     dispatch(actions.setUserInfoRequested());
 
-    const response = await spotifyService.getUserProfile();
+    const response = await services.getUserProfile();
     console.log('response', response);
 
     if (response) {
@@ -29,4 +29,20 @@ export const changeLanguage = (lng: string) => (dispatch: any) => {
 export const logoutUser = () => (dispatch: any) => {
   dispatch(actions.logoutUser());
   localStorage.clear();
+};
+
+export const getPlaylistFilters = () => async (dispatch: any) => {
+  try {
+    dispatch(actions.setFiltersInfoRequested());
+
+    const response = await services.getPlayListFilters();
+
+    if (response) {
+      dispatch(actions.setFiltersInfoFulfilled(response.filters));
+    } else {
+      throw new Error('Deu ruim');
+    }
+  } catch (error) {
+    dispatch(actions.setFiltersInfoFailed());
+  }
 };

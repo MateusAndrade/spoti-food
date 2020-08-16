@@ -34,3 +34,16 @@ export const setUserLanguage = createAction(
   actionTypes.USER_CHANGE_LANGUAGE,
   (payload) => ({ payload }),
 );
+
+export const setFiltersInfoRequested = createAction(
+  actionTypes.FILTERS_INFO_REQUESTED,
+);
+
+export const setFiltersInfoFulfilled = createAction(
+  actionTypes.FILTERS_INFO_FULFILLED,
+  (payload) => ({ payload }),
+);
+
+export const setFiltersInfoFailed = createAction(
+  actionTypes.FILTERS_INFO_FAILED,
+);

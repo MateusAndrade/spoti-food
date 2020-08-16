@@ -2,24 +2,19 @@ import * as actionsTypes from '../actions/types';
 
 import { IAction } from '../actions/interfaces';
 
-export enum TAuthStatus {
-  FAILED = 'FAILED',
-  FULFILLED = 'FULFILLED',
-  LOADING = 'LOADING',
-  PENDING = 'PENDING',
-}
+import { TGenericState } from './interface';
 
 export type TAuthState = {
   access_token: string;
   refresh_token: string;
-  status: keyof typeof TAuthStatus;
+  status: keyof typeof TGenericState;
   language: 'pt-BR' | 'en' | 'es';
 };
 
 const initialState: TAuthState = {
   access_token: '',
   refresh_token: '',
-  status: TAuthStatus.PENDING,
+  status: TGenericState.PENDING,
   language: 'pt-BR',
 };
 
@@ -31,7 +26,7 @@ const authReducer = (
     case actionsTypes.USER_AUTHENTICATED_REQUESTED:
       return {
         ...state,
-        status: TAuthStatus.LOADING,
+        status: TGenericState.LOADING,
       };
 
     case actionsTypes.USER_AUTHENTICATED_FULFILLED:
@@ -39,13 +34,13 @@ const authReducer = (
         ...state,
         access_token: action.payload.access_token,
         refresh_token: action.payload.refresh_token,
-        status: TAuthStatus.FULFILLED,
+        status: TGenericState.FULFILLED,
       };
 
     case actionsTypes.USER_AUTHENTICATED_FAILED:
       return {
         ...state,
-        status: TAuthStatus.FAILED,
+        status: TGenericState.FAILED,
       };
 
     case actionsTypes.USER_CHANGE_LANGUAGE:
