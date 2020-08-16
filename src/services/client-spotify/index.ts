@@ -7,17 +7,13 @@ const apiInstance = axios.create({
 });
 
 apiInstance.interceptors.request.use((config) => {
-  const persistInfo = localStorage.getItem('persist:v1');
+  const accessToken = localStorage.getItem('@spoti-food/access_token');
 
-  if (persistInfo) {
-    const {
-      auth: { access_token },
-    } = JSON.parse(persistInfo);
-
+  if (accessToken) {
     return {
       ...config,
       headers: {
-        Authorization: `Bearer ${access_token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     };
   } else {

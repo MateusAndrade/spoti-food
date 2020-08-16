@@ -22,8 +22,8 @@ export interface User {
   country: string;
   display_name: string;
   email: string;
-  explicit_content: ExplicitContent;
-  external_urls: ExternalUrls;
+  explicit_content: ExplicitContent | null;
+  external_urls: ExternalUrls | null;
   followers: Followers;
   href: string;
   id: string;

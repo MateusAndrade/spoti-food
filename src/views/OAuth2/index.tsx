@@ -33,6 +33,9 @@ const OAuth2 = () => {
 
       if (tokens) {
         dispatch(actions.setUserAuthenticatedFulfilled(tokens));
+        // TODO: apply a elegante solution
+        localStorage.setItem('@spoti-food/access_token', tokens.access_token);
+        localStorage.setItem('@spoti-food/refresh_token', tokens.refresh_token);
         redirectToPlaylists();
       } else {
         throw new Error('Failed to fetch Auth Info');

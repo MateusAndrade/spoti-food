@@ -11,7 +11,7 @@ const PrivateRouter = () => (
       <div>{routes.PLAYLISTS}</div>
     </Route>
     <Route path={routes.ME} component={ProfileView} />
-    <Redirect from="/" to={routes.PLAYLISTS} />
+    <Redirect from="/" to={routes.ME} />
   </Switch>
 );
 

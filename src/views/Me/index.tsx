@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 
+import * as thunks from '../../store/thunks';
+import * as selectors from '../../store/reducers/selectors';
+
+import { UserCard } from '../../components';
+
 const ProfileView = () => {
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectors.getUserInfo);
+  const { loading, failed, fullfiled } = useSelector(selectors.getUserState);
+
+  useEffect(() => {
+    if (!fullfiled) {
+      dispatch(thunks.getUserInfo());
+    }
+  }, [dispatch]);
+
   return (
     <Grid container>
-      <Grid item>
-        <Avatar
-          alt="Remy Sharp"
-          src="https://avatars2.githubusercontent.com/u/15278828?s=460&u=0e0c707ec9a814def7f53b28c3186575d3d3703d&v=4"
-          style={{ width: 150, height: 150 }}
-        />
-      </Grid>
+      {loading ? (
+        'Loading...'
+      ) : (
+        <Grid item xs={12} spacing={2}>
+          <UserCard
+            name={user.display_name}
+            image={user.images.length ? user.images[0].url : ''}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };

@@ -6,7 +6,7 @@ import { User } from './interface';
 
 const getUserProfile = async (): Promise<User | null> => {
   try {
-    const { data } = await client.get<User>(services.OAUTH2_URL);
+    const { data } = await client.get<User>(services.ME);
 
     return data;
   } catch (error) {
