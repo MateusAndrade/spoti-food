@@ -28,4 +28,7 @@ export const setUserInfoFulfilled = createAction(
 
 export const setUserInfoFailed = createAction(actionTypes.USER_INFO_FAILED);
 
-export const setUserLanguage = createAction(actionTypes.USER_CHANGE_LANGUAGE);
+export const setUserLanguage = createAction(
+  actionTypes.USER_CHANGE_LANGUAGE,
+  (payload) => ({ payload }),
+);

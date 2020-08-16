@@ -12,4 +12,13 @@ export default {
       profile: 'Profile',
     },
   },
+  profile: {
+    followers: 'Followers',
+    changeLanguage: 'Change Language',
+    changeLanguageOptions: {
+      'pt-BR': 'Brazilian Portuguese',
+      es: 'Spanish',
+      en: 'English',
+    },
+  },
 };

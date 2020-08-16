@@ -2,6 +2,8 @@ import * as actions from '../actions/actions';
 
 import spotifyService from '../../services';
 
+import i18n from '../../i18n';
+
 export const getUserInfo = () => async (dispatch: any) => {
   try {
     dispatch(actions.setUserInfoRequested());
@@ -17,4 +19,9 @@ export const getUserInfo = () => async (dispatch: any) => {
   } catch (error) {
     dispatch(actions.setUserInfoFailed());
   }
+};
+
+export const changeLanguage = (lng: string) => (dispatch: any) => {
+  dispatch(actions.setUserLanguage(lng));
+  i18n.changeLanguage(lng);
 };
