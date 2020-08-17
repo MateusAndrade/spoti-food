@@ -1,5 +1,6 @@
 import { TReduxState } from './interface';
 import { User } from '../../services/me/interface';
+import { Filter } from '../../services/filters/interface';
 
 export const isUserAuthenticated = ({ auth }: TReduxState): boolean =>
   Boolean(auth.access_token && auth.refresh_token);
@@ -14,3 +15,6 @@ export const getUserState = ({ user }: TReduxState) => ({
   failed: user.status === 'FAILED',
   fullfiled: user.status === 'FULFILLED',
 });
+
+export const getPlaylistFilters = ({ filters }: TReduxState): Filter[] =>
+  filters.filters;

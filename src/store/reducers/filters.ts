@@ -3,10 +3,10 @@ import * as actionsTypes from '../actions/types';
 import { IAction } from '../actions/interfaces';
 
 import { TGenericState } from './interface';
-import { act } from 'react-dom/test-utils';
+import { Filter } from '../../services/filters/interface';
 
 export type TFiltersState = {
-  filters: [];
+  filters: Filter[];
   status: keyof typeof TGenericState;
 };
 

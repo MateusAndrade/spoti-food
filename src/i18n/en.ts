@@ -24,4 +24,8 @@ export default {
       en: 'English',
     },
   },
+  playlists: {
+    filterTitle: 'Select your filters:',
+    cleanFilters: 'Clean filters',
+  },
 };

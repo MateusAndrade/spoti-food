@@ -11,11 +11,19 @@ export interface Validation {
   max?: number;
 }
 
+export enum FilterTypes {
+  LOCALE = 'locale',
+  COUNTRY = 'country',
+  TIMESTAMP = 'timestamp',
+  LIMIT = 'limit',
+  OFFSET = 'offset',
+}
+
 export interface Filter {
-  id: string;
+  id: FilterTypes;
   name: string;
-  values: Value[];
-  validation: Validation;
+  values?: Value[];
+  validation?: Validation;
 }
 
 export interface FiltersResponse {

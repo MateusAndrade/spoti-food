@@ -24,4 +24,8 @@ export default {
       en: 'Inglés',
     },
   },
+  playlists: {
+    filterTitle: 'Seleccione sus filtros:',
+    cleanFilters: 'Limpar filtros',
+  },
 };
