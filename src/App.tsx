@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   bottomBar: {
     bottom: 0,
     borderTop: '1px solid #f7f7f7',
-    position: 'absolute',
+    position: 'fixed',
     width: '100%',
   },
 });

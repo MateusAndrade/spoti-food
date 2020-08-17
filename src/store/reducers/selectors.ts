@@ -20,7 +20,14 @@ export const getUserState = ({ user }: TReduxState) => ({
 export const getPlaylistFilters = ({ filters }: TReduxState): Filter[] =>
   filters.filters;
 
-export const getPlaylists = ({ playlists }: TReduxState) => playlists.playlists;
+export const getPlaylistState = ({ playlists }: TReduxState) => ({
+  loading: playlists.status === 'LOADING',
+  failed: playlists.status === 'FAILED',
+  fullfiled: playlists.status === 'FULFILLED',
+});
+
+export const getPlaylists = ({ playlists }: TReduxState): Playlist[] =>
+  playlists.playlists ? playlists.playlists.items : [];
 
 export const getPlaylistsMessage = ({ playlists }: TReduxState): string =>
   playlists.message;

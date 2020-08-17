@@ -25,6 +25,7 @@ import SelectFilter from './Select';
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
+      position: 'fixed',
       width: '100%',
     },
     header: {
@@ -64,11 +65,15 @@ const Filters = () => {
   const [selectedFilters, setSelectedFilters] = useState({});
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       dispatch(thunks.getFeaturedPlaylists(selectedFilters));
     }, 30000);
 
     dispatch(thunks.getFeaturedPlaylists(selectedFilters));
+
+    return () => {
+      clearInterval(interval);
+    };
   }, [selectedFilters]);
 
   const handleFilterChange = (key: string, value: string | number) => {
