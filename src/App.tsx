@@ -45,10 +45,12 @@ function App() {
   const [activeTab, setActiveTab] = useState<0 | 1>(0);
 
   useEffect(() => {
-    if (activeTab) {
-      history.replace(routes.ME);
-    } else {
-      history.replace(routes.PLAYLISTS);
+    if (authenticated) {
+      if (activeTab) {
+        history.replace(routes.ME);
+      } else {
+        history.replace(routes.PLAYLISTS);
+      }
     }
   }, [activeTab]);
 

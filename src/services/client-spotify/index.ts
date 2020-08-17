@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import services from '../../constants/services';
 
@@ -19,6 +19,14 @@ apiInstance.interceptors.request.use((config) => {
   } else {
     return config;
   }
+});
+
+apiInstance.interceptors.response.use((response: AxiosResponse<any>) => {
+  if (response.status === 401) {
+    window.location.replace('https://spotifood-front.herokuapp.com/login');
+    localStorage.clear();
+  }
+  return response;
 });
 
 export default apiInstance;
