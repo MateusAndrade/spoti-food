@@ -7,8 +7,7 @@
   "main": "server.js",
   "private": true,
   "scripts": {
-    "start": "node server.js",
-    "start-dev": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
