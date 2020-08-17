@@ -1,6 +1,7 @@
 import { TReduxState } from './interface';
 import { User } from '../../services/me/interface';
 import { Filter } from '../../services/filters/interface';
+import { Playlist } from '../../services/featuredPlaylists/interface';
 
 export const isUserAuthenticated = ({ auth }: TReduxState): boolean =>
   Boolean(auth.access_token && auth.refresh_token);
@@ -18,3 +19,8 @@ export const getUserState = ({ user }: TReduxState) => ({
 
 export const getPlaylistFilters = ({ filters }: TReduxState): Filter[] =>
   filters.filters;
+
+export const getPlaylists = ({ playlists }: TReduxState) => playlists.playlists;
+
+export const getPlaylistsMessage = ({ playlists }: TReduxState): string =>
+  playlists.message;

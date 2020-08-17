@@ -65,3 +65,21 @@ export const authenticateUser = (code: string) => async (dispatch: any) => {
     dispatch(actions.setUserAuthenticatedFailed());
   }
 };
+
+export const getFeaturedPlaylists = (filters: {
+  [key: string]: string;
+}) => async (dispatch: any) => {
+  try {
+    dispatch(actions.setPlaylistsInfoRequested());
+
+    const response = await services.getFeaturedPlaylists(filters);
+
+    if (response) {
+      dispatch(actions.setPlaylistsInfoFulfilled(response));
+    } else {
+      throw new Error('Deu ruim');
+    }
+  } catch (error) {
+    dispatch(actions.setUserAuthenticatedFailed());
+  }
+};

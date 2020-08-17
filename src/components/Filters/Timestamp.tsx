@@ -9,7 +9,7 @@ const Timestamp = ({ label, onChange }: CommonProps) => {
 
   useEffect(() => {
     if (selectedDate) {
-      onChange(selectedDate);
+      onChange(new Date().toISOString());
     }
   }, [selectedDate]);
 

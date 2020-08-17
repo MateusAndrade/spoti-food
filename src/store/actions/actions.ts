@@ -47,3 +47,16 @@ export const setFiltersInfoFulfilled = createAction(
 export const setFiltersInfoFailed = createAction(
   actionTypes.FILTERS_INFO_FAILED,
 );
+
+export const setPlaylistsInfoRequested = createAction(
+  actionTypes.PLAYLISTS_INFO_REQUESTED,
+);
+
+export const setPlaylistsInfoFulfilled = createAction(
+  actionTypes.PLAYLISTS_INFO_FULFILLED,
+  (payload) => ({ payload }),
+);
+
+export const setPlaylistsInfoFailed = createAction(
+  actionTypes.PLAYLISTS_INFO_FAILED,
+);

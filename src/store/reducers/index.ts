@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import user from './user';
 import filters from './filters';
+import playlists from './playlists';
 
 import { TReduxState } from './interface';
 import { IAction } from '../actions/interfaces';
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   auth,
   filters,
   user,
+  playlists,
 });
 
 const rootReducer = (state: TReduxState, action: IAction<any>) => {

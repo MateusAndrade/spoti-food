@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Collapse from '@material-ui/core/Collapse';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -58,13 +59,16 @@ const Filters = () => {
 
   const filters = useSelector(selectors.getPlaylistFilters);
 
-  const [showFilters, setShowFilters] = useState<boolean>(true);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
 
   const [selectedFilters, setSelectedFilters] = useState({});
 
   useEffect(() => {
-    // dispatch(thunks)
-    console.log('buscar as paradas', selectedFilters);
+    setInterval(() => {
+      dispatch(thunks.getFeaturedPlaylists(selectedFilters));
+    }, 30000);
+
+    dispatch(thunks.getFeaturedPlaylists(selectedFilters));
   }, [selectedFilters]);
 
   const handleFilterChange = (key: string, value: string | number) => {
@@ -110,35 +114,37 @@ const Filters = () => {
   };
 
   return (
-    <Paper elevation={1} className={classes.root}>
-      <Box className={classes.header}>
-        <Typography>{t('playlists.filterTitle')}</Typography>
-        <Switch
-          checked={showFilters}
-          onChange={() => setShowFilters(!showFilters)}
-        />
-      </Box>
-      <div className={classes.container}>
-        <Collapse in={showFilters} style={{ width: '100%' }}>
-          <Box className={classes.paper}>
-            {filters.map((filter, index) => (
-              <Box className={classes.componentContainer} key={index}>
-                {renderComponent(filter)}
-              </Box>
-            ))}
-          </Box>
-          <Box
-            marginBottom="10px"
-            marginRight="10px"
-            display="flex"
-            justifyContent="flex-end">
-            <Button onClick={cleanFilters}>
-              {t('playlists.cleanFilters')}
-            </Button>
-          </Box>
-        </Collapse>
-      </div>
-    </Paper>
+    <ClickAwayListener onClickAway={() => setShowFilters(false)}>
+      <Paper elevation={1} className={classes.root}>
+        <Box className={classes.header}>
+          <Typography>{t('playlists.filterTitle')}</Typography>
+          <Switch
+            checked={showFilters}
+            onChange={() => setShowFilters(!showFilters)}
+          />
+        </Box>
+        <div className={classes.container}>
+          <Collapse in={showFilters} style={{ width: '100%' }}>
+            <Box className={classes.paper}>
+              {filters.map((filter, index) => (
+                <Box className={classes.componentContainer} key={index}>
+                  {renderComponent(filter)}
+                </Box>
+              ))}
+            </Box>
+            <Box
+              marginBottom="10px"
+              marginRight="10px"
+              display="flex"
+              justifyContent="flex-end">
+              <Button onClick={cleanFilters}>
+                {t('playlists.cleanFilters')}
+              </Button>
+            </Box>
+          </Collapse>
+        </div>
+      </Paper>
+    </ClickAwayListener>
   );
 };
 
